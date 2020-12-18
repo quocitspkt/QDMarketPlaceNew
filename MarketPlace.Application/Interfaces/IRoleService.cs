@@ -9,18 +9,18 @@ namespace MarketPlace.Application.Interfaces
 {
     public interface IRoleService
     {
-        //Task<bool> AddAsync(AnnouncementViewModel announcement, List<AnnouncementUserViewModel> announcementUsers, AppRoleViewModel userVm);
+        Task<bool> AddAsync(AnnouncementViewModel announcement, List<AnnouncementUserViewModel> announcementUsers, AppRoleViewModel userVm);
 
         Task DeleteAsync(Guid id);
 
-        Task<List<CusRoleViewModel>> GetAllAsync();
+        Task<List<AppRoleViewModel>> GetAllAsync();
 
-        PagedResult<CusRoleViewModel> GetAllPagingAsync(string keyword, int page, int pageSize);
+        PagedResult<AppRoleViewModel> GetAllPagingAsync(string keyword, int page, int pageSize);
 
-        Task<CusRoleViewModel> GetById(Guid id);
+        Task<AppRoleViewModel> GetById(Guid id);
 
 
-        Task UpdateAsync(CusRoleViewModel userVm);
+        Task UpdateAsync(AppRoleViewModel userVm);
 
         List<PermissionViewModel> GetListFunctionWithRole(Guid roleId);
 

@@ -10,7 +10,7 @@ using System.Text;
 namespace MarketPlace.Data.Entities
 {
     [Table("Shops")]
-    public class Shop : DomainEntity<int>, IDateTracking, ISwitchable, IHasOwner
+    public class Shop : DomainEntity<int>, IDateTracking, ISwitchable, IHasOwner<Guid>
     {
         [StringLength(250)]
         
@@ -29,10 +29,10 @@ namespace MarketPlace.Data.Entities
         public int Warning { get; set; }
         public bool Deposit { get; set; }
         public Status Status { get; set; }
-        public int OwnerId { get; set; }
+        public Guid OwnerId { get; set; }
 
         [ForeignKey("OwnerId")]
-        public virtual CusUser User { get; set; }
+        public virtual AppUser AppUser { get; set; }
 
     }
 }

@@ -15,7 +15,7 @@ using System.Text;
 
 namespace MarketPlace.Data.EF
 {
-    public class AppDbContext : IdentityDbContext<CusUser, CusUserRole, int>
+    public class AppDbContext : IdentityDbContext<AppUser, AppRole, Guid>
     {
         public AppDbContext(DbContextOptions options):base(options)
         {
@@ -40,11 +40,11 @@ namespace MarketPlace.Data.EF
         public DbSet<ProductAttribute> ProductAttributes { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<ProductTag> ProductTags { get; set; }
-        public DbSet<CusRole> CusRoles { get; set; }
+        public DbSet<AppRole> AppRoles { get; set; }
         public DbSet<Shop> Shops { get; set; }
         public DbSet<Tag> Tags { get; set; }
-        public DbSet<CusUser> CusUsers { get; set; }
-        public DbSet<CusUserRole> CusUserRoles { get; set; }
+        public DbSet<AppUser> AppUser { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

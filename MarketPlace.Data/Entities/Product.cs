@@ -11,7 +11,7 @@ using System.Text;
 namespace MarketPlace.Data.Entities
 {
     [Table("Products")]
-    public class Product : DomainEntity<int>, IDateTracking, IHasOwner, IHasSeoMetaData, IHasSoftDelete, ISortable, ISwitchable
+    public class Product : DomainEntity<int>, IDateTracking, IHasOwner<Guid>, IHasSeoMetaData, IHasSoftDelete, ISortable, ISwitchable
     {
         [Required]
         [StringLength(128)]
@@ -82,7 +82,7 @@ namespace MarketPlace.Data.Entities
         
         public Status Status { get; set; }
 
-        public int OwnerId { get; set; }
+        public Guid OwnerId { get; set; }
 
         [ForeignKey("CategoryId")]
         public virtual ProductCategory ProductCategory { get; set; }

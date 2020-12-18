@@ -12,6 +12,7 @@ namespace MarketPlace.Data.EF
     public class EFRepository<T, K> : IRepository<T, K>, IDisposable where T : DomainEntity<K>
     {
         private readonly AppDbContext _context;
+
         public EFRepository(AppDbContext context)
         {
             _context = context;
@@ -26,7 +27,7 @@ namespace MarketPlace.Data.EF
             if (_context != null)
             {
                 _context.Dispose();
-            }    
+            }
         }
 
         public IQueryable<T> FindAll(params Expression<Func<T, object>>[] includeProperties)
@@ -37,12 +38,12 @@ namespace MarketPlace.Data.EF
                 foreach (var includeProperty in includeProperties)
                 {
                     items = items.Include(includeProperty);
-                }    
+                }
             }
             return items;
         }
 
-        public IQueryable<T> FindAll(Expression<Func<T, bool>> predicate, Expression<Func<T, object>>[] includeProperties)
+        public IQueryable<T> FindAll(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
         {
             IQueryable<T> items = _context.Set<T>();
             if (includeProperties != null)
@@ -57,7 +58,7 @@ namespace MarketPlace.Data.EF
 
         public T FindById(K id, params Expression<Func<T, object>>[] includeProperties)
         {
-            return FindAll(includeProperties).SingleOrDefault(x=>x.Id.Equals(id));
+            return FindAll(includeProperties).SingleOrDefault(x => x.Id.Equals(id));
         }
 
         public T FindSingle(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
@@ -72,7 +73,8 @@ namespace MarketPlace.Data.EF
 
         public void Remove(K id)
         {
-            Remove(FindById(id));
+            var entity = FindById(id);
+            Remove(entity);
         }
 
         public void RemoveMultiple(List<T> entities)

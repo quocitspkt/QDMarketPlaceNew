@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using MarketPlace.Infrastructure.SharedKernel;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,17 +8,18 @@ using System.Text;
 
 namespace MarketPlace.Data.Entities
 {
-    [Table("CusUserRoles")]
-    public class CusUserRole : IdentityRole<int>
+    [Table("AppRoles")]
+    public class AppRole : IdentityRole<Guid>
     {
-        public CusUserRole(): base()
+        public AppRole() : base()
         {
 
         }
-        public CusUserRole(string name,string description):base(name)
+        public AppRole(string name, string description) : base(name)
         {
             this.Description = description;
         }
+
         [StringLength(250)]
         public string Description { get; set; }
     }

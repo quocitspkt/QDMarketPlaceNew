@@ -9,7 +9,7 @@ namespace MarketPlace.Data.Entities
     [Table("ActionInFunctions")]
     public class ActionInFunction:DomainEntity<int>
     {
-        public int FunctionId { get; set; }
+        public string FunctionId { get; set; }
         public int ActionId { get; set; }
         [ForeignKey("FunctionId")]
         public virtual Function Function { get; set; }

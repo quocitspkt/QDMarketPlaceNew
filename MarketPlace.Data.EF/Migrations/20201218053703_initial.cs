@@ -11,8 +11,7 @@ namespace MarketPlace.Data.EF.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
@@ -27,8 +26,7 @@ namespace MarketPlace.Data.EF.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(nullable: false),
                     UserName = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
@@ -43,30 +41,17 @@ namespace MarketPlace.Data.EF.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    Password = table.Column<string>(maxLength: 50, nullable: true),
-                    FullName = table.Column<string>(maxLength: 50, nullable: true),
-                    BirthDay = table.Column<DateTime>(nullable: false),
-                    Address = table.Column<string>(maxLength: 250, nullable: true),
-                    RegisteredDate = table.Column<DateTime>(nullable: false),
-                    LastLoginDate = table.Column<DateTime>(nullable: false),
+                    FullName = table.Column<string>(nullable: true),
+                    BirthDay = table.Column<DateTime>(nullable: true),
+                    Balance = table.Column<decimal>(nullable: false),
+                    Avatar = table.Column<string>(nullable: true),
+                    DateCreated = table.Column<DateTime>(nullable: false),
+                    DateModified = table.Column<DateTime>(nullable: false),
                     Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CusRoles",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(maxLength: 50, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CusRoles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -100,13 +85,13 @@ namespace MarketPlace.Data.EF.Migrations
                 name: "Functions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Code = table.Column<string>(maxLength: 50, nullable: true),
-                    Name = table.Column<string>(maxLength: 50, nullable: true),
-                    ParentId = table.Column<int>(nullable: false),
-                    Status = table.Column<int>(nullable: false),
-                    SortOrder = table.Column<int>(nullable: false)
+                    Id = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(maxLength: 128, nullable: false),
+                    URL = table.Column<string>(maxLength: 250, nullable: false),
+                    ParentId = table.Column<string>(maxLength: 128, nullable: true),
+                    IconCss = table.Column<string>(nullable: true),
+                    SortOrder = table.Column<int>(nullable: false),
+                    Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -175,7 +160,7 @@ namespace MarketPlace.Data.EF.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<int>(nullable: false),
+                    RoleId = table.Column<Guid>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
                 },
@@ -196,7 +181,7 @@ namespace MarketPlace.Data.EF.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
                 },
@@ -218,7 +203,7 @@ namespace MarketPlace.Data.EF.Migrations
                     LoginProvider = table.Column<string>(nullable: false),
                     ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: false)
+                    UserId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -235,8 +220,8 @@ namespace MarketPlace.Data.EF.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(nullable: false),
-                    RoleId = table.Column<int>(nullable: false)
+                    UserId = table.Column<Guid>(nullable: false),
+                    RoleId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -259,7 +244,7 @@ namespace MarketPlace.Data.EF.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: false),
                     LoginProvider = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: false),
                     Value = table.Column<string>(nullable: true)
@@ -282,7 +267,7 @@ namespace MarketPlace.Data.EF.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderDate = table.Column<DateTime>(nullable: false),
-                    CustomerId = table.Column<int>(nullable: false),
+                    CustomerId = table.Column<Guid>(nullable: false),
                     Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -302,7 +287,7 @@ namespace MarketPlace.Data.EF.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OwnerId = table.Column<int>(nullable: false),
+                    OwnerId = table.Column<Guid>(nullable: false),
                     ProductId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(maxLength: 250, nullable: true),
                     Description = table.Column<string>(maxLength: 500, nullable: true),
@@ -321,18 +306,17 @@ namespace MarketPlace.Data.EF.Migrations
                     IsDeleted = table.Column<bool>(nullable: false),
                     Status = table.Column<int>(nullable: false),
                     DateCreated = table.Column<DateTime>(nullable: false),
-                    DateModified = table.Column<DateTime>(nullable: false),
-                    UserId = table.Column<int>(nullable: true)
+                    DateModified = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Posts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Posts_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Posts_AspNetUsers_OwnerId",
+                        column: x => x.OwnerId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -350,7 +334,7 @@ namespace MarketPlace.Data.EF.Migrations
                     Warning = table.Column<int>(nullable: false),
                     Deposit = table.Column<bool>(nullable: false),
                     Status = table.Column<int>(nullable: false),
-                    OwnerId = table.Column<int>(nullable: false)
+                    OwnerId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -390,7 +374,7 @@ namespace MarketPlace.Data.EF.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FunctionId = table.Column<int>(nullable: false),
+                    FunctionId = table.Column<string>(nullable: true),
                     ActionId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -407,7 +391,7 @@ namespace MarketPlace.Data.EF.Migrations
                         column: x => x.FunctionId,
                         principalTable: "Functions",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -416,29 +400,26 @@ namespace MarketPlace.Data.EF.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(nullable: false),
-                    ActionId = table.Column<int>(nullable: false),
-                    FunctionId = table.Column<int>(nullable: false)
+                    RoleId = table.Column<Guid>(nullable: false),
+                    FunctionId = table.Column<string>(nullable: true),
+                    CanCreate = table.Column<bool>(nullable: false),
+                    CanRead = table.Column<bool>(nullable: false),
+                    CanUpdate = table.Column<bool>(nullable: false),
+                    CanDelete = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Permissions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Permissions_DoActions_ActionId",
-                        column: x => x.ActionId,
-                        principalTable: "DoActions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Permissions_Functions_FunctionId",
                         column: x => x.FunctionId,
                         principalTable: "Functions",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Permissions_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
+                        name: "FK_Permissions_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -474,7 +455,7 @@ namespace MarketPlace.Data.EF.Migrations
                     IsDeleted = table.Column<bool>(nullable: false),
                     SortOrder = table.Column<int>(nullable: false),
                     Status = table.Column<int>(nullable: false),
-                    OwnerId = table.Column<int>(nullable: false)
+                    OwnerId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -635,7 +616,7 @@ namespace MarketPlace.Data.EF.Migrations
                     Positive = table.Column<bool>(nullable: false),
                     DateCreated = table.Column<DateTime>(nullable: false),
                     DateModified = table.Column<DateTime>(nullable: false),
-                    OwnerId = table.Column<int>(nullable: false),
+                    OwnerId = table.Column<Guid>(nullable: false),
                     Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -835,19 +816,14 @@ namespace MarketPlace.Data.EF.Migrations
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Permissions_ActionId",
-                table: "Permissions",
-                column: "ActionId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Permissions_FunctionId",
                 table: "Permissions",
                 column: "FunctionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Permissions_UserId",
+                name: "IX_Permissions_RoleId",
                 table: "Permissions",
-                column: "UserId");
+                column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PostInCategories_CategoryId",
@@ -870,9 +846,9 @@ namespace MarketPlace.Data.EF.Migrations
                 column: "TagId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Posts_UserId",
+                name: "IX_Posts_OwnerId",
                 table: "Posts",
-                column: "UserId");
+                column: "OwnerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductAttributes_AttributeValueId",
@@ -935,9 +911,6 @@ namespace MarketPlace.Data.EF.Migrations
                 name: "Comments");
 
             migrationBuilder.DropTable(
-                name: "CusRoles");
-
-            migrationBuilder.DropTable(
                 name: "FeedBacks");
 
             migrationBuilder.DropTable(
@@ -959,7 +932,7 @@ namespace MarketPlace.Data.EF.Migrations
                 name: "ProductTags");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "DoActions");
 
             migrationBuilder.DropTable(
                 name: "Shops");
@@ -968,10 +941,10 @@ namespace MarketPlace.Data.EF.Migrations
                 name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "DoActions");
+                name: "Functions");
 
             migrationBuilder.DropTable(
-                name: "Functions");
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "PostCategories");

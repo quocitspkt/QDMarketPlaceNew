@@ -9,7 +9,7 @@ namespace MarketPlace.Application.ViewModels.System
         public int Id { get; set; }
 
 
-        public int RoleId { get; set; }
+        public Guid RoleId { get; set; }
 
         public string FunctionId { get; set; }
 
@@ -21,7 +21,7 @@ namespace MarketPlace.Application.ViewModels.System
 
         public bool CanDelete { set; get; }
 
-        public CusRoleViewModel AppRole { get; set; }
+        public AppRoleViewModel AppRole { get; set; }
 
         public FunctionViewModel Function { get; set; }
     }

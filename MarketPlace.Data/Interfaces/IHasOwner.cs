@@ -4,8 +4,8 @@ using System.Text;
 
 namespace MarketPlace.Data.Interfaces
 {
-    public interface IHasOwner
+    public interface IHasOwner<T>
     {
-        int OwnerId { set; get; }
+        T OwnerId { set; get; }
     }
 }

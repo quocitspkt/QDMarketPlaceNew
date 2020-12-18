@@ -12,9 +12,9 @@ namespace MarketPlace.Data.EF
     public class DbInitializer
     {
         private readonly AppDbContext _context;
-        private UserManager<CusUser> _userManager;
-        private RoleManager<CusUserRole> _roleManager;
-        public DbInitializer(AppDbContext context, UserManager<CusUser> userManager, RoleManager<CusUserRole> roleManager)
+        private UserManager<AppUser> _userManager;
+        private RoleManager<AppRole> _roleManager;
+        public DbInitializer(AppDbContext context, UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
         {
             _context = context;
             _userManager = userManager;
@@ -24,28 +24,28 @@ namespace MarketPlace.Data.EF
         {
             /*if (!_roleManager.Roles.Any())
             {
-                await _roleManager.CreateAsync(new CusUserRole()
+                await _roleManager.CreateAsync(new AppRole()
                 {
                     Name = "Admin",
                     NormalizedName = "Admin",
                     Description = "Top manager"
                 });
-                await _roleManager.CreateAsync(new CusUserRole()
+                await _roleManager.CreateAsync(new AppRole()
                 {
                     Name = "Staff",
                     NormalizedName = "Staff",
                     Description = "Staff"
                 });
-                await _roleManager.CreateAsync(new CusUserRole()
+                await _roleManager.CreateAsync(new AppRole()
                 {
-                    Name = "Customer",
-                    NormalizedName = "Customer",
-                    Description = "Customer"
+                    Name = "Apptomer",
+                    NormalizedName = "Apptomer",
+                    Description = "Apptomer"
                 });
             }
             if (!_userManager.Users.Any())
             {
-                await _userManager.CreateAsync(new CusUser()
+                await _userManager.CreateAsync(new AppUser()
                 {
                     UserName = "admin",
                     FullName = "Administrator",

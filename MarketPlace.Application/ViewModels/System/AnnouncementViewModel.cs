@@ -6,23 +6,20 @@ using System.Text;
 
 namespace MarketPlace.Application.ViewModels.System
 {
-    public class FunctionViewModel
+    public class AnnouncementViewModel
     {
         public string Id { get; set; }
         [Required]
-        [StringLength(128)]
-        public string Name { set; get; }
-
-        [Required]
         [StringLength(250)]
-        public string URL { set; get; }
+        public string Title { set; get; }
 
+        [StringLength(250)]
+        public string Content { set; get; }
 
-        [StringLength(128)]
-        public string ParentId { set; get; }
+        public Guid UserId { set; get; }
 
-        public string IconCss { get; set; }
-        public int SortOrder { set; get; }
+        public DateTime DateCreated { set; get; }
+        public DateTime DateModified { set; get; }
         public Status Status { set; get; }
     }
 }
