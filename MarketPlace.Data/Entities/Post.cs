@@ -10,10 +10,10 @@ using System.Text;
 namespace MarketPlace.Data.Entities
 {
     [Table("Posts")]
-    public class Post : DomainEntity<int>, IHasOwner, IHasSeoMetaData, IHasSoftDelete, ISwitchable, IDateTracking
+    public class Post : DomainEntity<int>, IHasOwner<Guid>, IHasSeoMetaData, IHasSoftDelete, ISwitchable, IDateTracking
     {
         [Required]
-        public int OwnerId { get; set; }
+        public Guid OwnerId { get; set; }
         
         public int ProductId { get; set; }
 
@@ -69,7 +69,7 @@ namespace MarketPlace.Data.Entities
         public Status Status { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateModified { get; set; }
-
-        public virtual CusUser User { get; set; }
+        [ForeignKey("OwnerId")]
+        public virtual AppUser AppUser { get; set; }
     }
 }

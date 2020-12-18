@@ -14,7 +14,7 @@ namespace MarketPlace.Ultilities.Constants
 
         public const string ProductTag = "Product";
         public const string BlogTag = "Blog";
-        public class CusRole
+        public class CusUserRole
         {
             public const string AdminRole = "Admin";
         }

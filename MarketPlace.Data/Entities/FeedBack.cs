@@ -9,7 +9,7 @@ using System.Text;
 namespace MarketPlace.Data.Entities
 {
     [Table("FeedBacks")]
-    public class FeedBack : DomainEntity<int>, IDateTracking,IHasOwner,ISwitchable
+    public class FeedBack : DomainEntity<int>, IDateTracking,IHasOwner<Guid>,ISwitchable
     {
         public int ProductId { get; set; }
 
@@ -22,12 +22,12 @@ namespace MarketPlace.Data.Entities
 
         public DateTime DateModified { get; set; }
 
-        public int OwnerId { get; set; }
+        public Guid OwnerId { get; set; }
 
         public Status Status { get; set; }
 
         [ForeignKey("OwnerId")]
-        public virtual CusUser User { get; set; }
+        public virtual AppUser AppUser { get; set; }
 
         [ForeignKey("ProductId")]
         public virtual Product Product { get; set; }

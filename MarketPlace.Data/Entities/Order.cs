@@ -13,11 +13,11 @@ namespace MarketPlace.Data.Entities
     {
         
         public DateTime OrderDate { get; set; }
-        public int CustomerId { get; set; }
+        public Guid CustomerId { get; set; }
 
         public Status Status { get; set; }
 
         [ForeignKey("CustomerId")]
-        public virtual CusUser User { get; set; }
+        public virtual AppUser AppUser { get; set; }
     }
 }

@@ -25,7 +25,7 @@ namespace MarketPlace.Authorization
             {
                 var listRole = roles.Value.Split(";");
                 var hasPermission = await _roleService.CheckPermission(resource, requirement.Name, listRole);
-                if (hasPermission || listRole.Contains(CommonConstants.CusRole.AdminRole))
+                if (hasPermission || listRole.Contains(CommonConstants.CusUserRole.AdminRole))
                 {
                     context.Succeed(requirement);
                 }

@@ -1,12 +1,12 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace MarketPlace.Application.ViewModels.System
 {
-    public class CusRoleViewModel
+    public class AppRoleViewModel
     {
-        public int Id { set; get; }
+        public Guid? Id { set; get; }
 
         public string Name { set; get; }
 
